@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>JavaScript 연습</h1>
+    <button id="btn1">버튼1</button>
+    <div id="here">여기</div>
+    <script type="module" src="./go.js"></script>
+    <script type="module" src="./go2.js"></script>
+
+    <script>
+        //1. var, let, const
+        //2. 호이스팅
+        //3. class: field + method + 생성자 메소드, object틀
+
+        class Shape {
+            constructor(name) {
+                this.model = name; //생성시마다 메서드 추가
+                this.draw = function () { console.log(this.model + "~~그리다...."); }
+            }
+            // 프로토타입 메서드 (클래스 안에다가 function 선언시에는 functino 예약어를 사용하지 않는다. )
+            display() {
+                return "나는 " + this.model;
+            }
+        }
+        const myshape = new Shape("도형");
+        console.log(myshape);
+        console.log(myshape.model);
+        myshape.draw();
+        console.log(myshape.display());
+
+        //4. 상속
+        class Rectangle extends Shape {
+            constructor(name, width, height) {
+                super(name);
+                this.width = width;
+                this.height = height;
+            }
+            show() {
+                return this.display() + " ,width= " + this.width + " ,height=" + this.height;
+            }
+        }
+        const myshape2 = new Rectangle("사각형", 10, 20);
+        console.log(myshape2.show());
+
+        //5. Arrow 함수 (즉시 실행 함수)
+        (function () { console.log("익명함수 실행"); })(); //전체를 괄호로 감싼다. 
+        const f1 = function () { console.log("익명함수 변수에 할당합니다.(리터럴함수)"); };
+        const f2 = () => { console.log("화살표함수로 변경합니다."); };
+        const f3 = (val) => "화살표함수 파라메터와 리턴";
+
+        f1();
+        f2();
+        const result = f3();
+        console.log(result);
+
+        class Header {
+            constructor() { this.color = "Red"; }
+            changeColor = function (e) {
+                const hereObj = document.getElementById("here");
+                if (this == window)
+                    hereObj.style.backgroundColor = "orange";
+                else if (this.nodeName == "BUTTON")
+                    hereObj.style.backgroundColor = "lightgreen";
+                else if (this.nodeName == "H1")
+                    hereObj.style.backgroundColor = "pink";
+                hereObj.innerHTML += this; console.dir(this);
+                e.stopPropagation(); //전파 막기 ... 버튼 클릭시 윈도우도 클릭된다. 
+            }
+        }
+        const myheader = new Header();
+        //이벤트와 이벤트 핸들러 연결
+        window.addEventListener("click", myheader.changeColor);
+        document.getElementById("btn1").addEventListener("click", myheader.changeColor);
+
+
+        //6. map 메서드로 값을 변형하여 return 
+        const myArray = ['apple', 'banana', 'orange'];
+        const myList = myArray.map((item, index) => "<p>" + index + "번째" + item + "</p>");
+        console.log(myList);
+        document.getElementById("here").innerHTML = myList.join().replaceAll(",", ""); //,를 지우고 문자로 합침.
+
+
+        //7. Destructing Arrays (배열을 구조화) : 함수가 배열을 반환할 때 유용
+        const arr = ['BMW520', '포터2', 'Discovery'];
+        // old way
+        const car = arr[0];
+        const truck = arr[1];
+        const suv = arr[2];
+        //
+        const [car2, truck2, suv2] = arr;
+        console.log(car2, truck2, suv2);
+        const [add, subtract, multiply, divide] = calculate(10, 3);
+        console.log(add, subtract, multiply, divide);
+
+        function calculate(a, b) {
+            const add = a + b;
+            const subtract = a - b;
+            const multiply = a * b; const divide = a / b;
+            return [add, subtract, multiply, divide];
+        }
+
+        //8. Destructing Object  
+        const obj = {
+            brand: 'Ford', model: 'Mustang', type: 'car', year: 2021, color: 'red',
+            registration: { city: "Houston", state: "Texas", country: "USA" }
+        }
+        myCarInfo(obj);
+        function myCarInfo(car) {
+            const message = 'My '
+                + car.type + ' is a ' + car.color + ' ' + car.brand + ' ' + car.model + '.';
+            document.getElementById("here").innerHTML = message;
+        }
+        myCarInfo2(obj)
+        //model에서 mm으로 따로 이름을 줄 수도 있다. 
+        function myCarInfo2({ brand, model: mm, registration: { state } }) {
+            const message = brand + " : " + 'My ' + mm + ' is registered in ' + state + '.';
+            document.getElementById("here").innerHTML += "<br>" + message;
+        }
+
+        //9. 스프레드 연산자  (....) : 배열과 object 에 적용해보기 
+        const numbersOne = [1, 2, 3];
+        const numbersTwo = [4, 5, 6];
+        const numbersCombined = [...numbersOne, ...numbersTwo];
+        const numbers = [1, 2, 3, 4, 5, 6];
+        const [one, two, ...rest] = numbers;
+        console.log(one, two, rest);
+
+        const v1 = { brand: 'Ford', model: 'Mustang', color: 'red' }
+        const v2 = { type: 'car', year: 2021, color: 'yellow' }
+        const myUpdatedCars = { ...v1, ...v2 }
+        console.log(v1)
+        console.log(v2)
+        console.log(myUpdatedCars)
+
+
+    </script>
+
+</body>
+
+</html>
