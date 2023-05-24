@@ -1,9 +1,13 @@
 import React from "react";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 //import App from './App';
 import reportWebVitals from "./reportWebVitals";
-import WebBoardList from "components1/WebBoardList";
+import AppStart4 from "AppStart4";
+//import WebBoardList from "components1/WebBoardList";
+//import App3 from "./App3";
 
 //import MyJSXTest from "components1/MyJSXTest";
 //import App2 from './App2';
@@ -11,7 +15,7 @@ import WebBoardList from "components1/WebBoardList";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   //<React.StrictMode>
-  <WebBoardList />
+  <AppStart4 />
   //</React.StrictMode>
 );
 
