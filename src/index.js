@@ -6,6 +6,10 @@ import "./index.css";
 //import App from './App';
 import reportWebVitals from "./reportWebVitals";
 import AppStart4 from "AppStart4";
+import StateTestComponent from "component4/StateTestComponent";
+import ReducerTestComponent from "components3/ReducerTestComponent";
+import { CounterProvider } from "component4/CounterProvider";
+import { CountLabel, NameChange, PlusButton } from "component4/ProviderTest";
 //import WebBoardList from "components1/WebBoardList";
 //import App3 from "./App3";
 
@@ -15,7 +19,16 @@ import AppStart4 from "AppStart4";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   //<React.StrictMode>
-  <AppStart4 />
+  //<AppStart4 />
+  <>
+    <StateTestComponent />
+    <ReducerTestComponent />
+    <CounterProvider>
+      <CountLabel />
+      <PlusButton />
+      <NameChange />
+    </CounterProvider>
+  </>
   //</React.StrictMode>
 );
 

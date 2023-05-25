@@ -6,3 +6,5 @@ const Light = ({ room, on }) => {
 };
 //export default Light;
 export default React.memo(Light);
+
+//

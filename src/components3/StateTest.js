@@ -23,14 +23,23 @@ function StateTest(props) {
   const nameRef = useRef();
   const ageRef = useRef();
 
+  //===============================================================================================
   //성능향상을 위해 함수를 rendering시 마다 재정의할 필요는 없다.
   //특정값이 변경시에만 다시 생성한다.
+  //## 성능향상 2 - 함수정의 부는 계속 렌더링 될때마다 다시 정의함. 그게 비효율적
+  //성능향상을 위해 함수를 rendering 시마다 재정의하는 것을 막는다.
+
+  //useEffect(() => {
+  //  console.log("handleIncrement가 변경되었습니다"); //다른일을 하는데도 계속 rendering할때마다 호출된다.
+  //}, [handleIncrement]);
+
   const handleIncrement = useCallback(() => {
     setCount(count + 1);
   }, [count]);
   const handleDecrement = useCallback(() => {
     setCount(count - 1);
   }, [count]);
+  //===============================================================================================
 
   const handleChange = (e) => {
     if (e.target.name == "mname") {
