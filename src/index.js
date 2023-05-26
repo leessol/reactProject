@@ -7,9 +7,13 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import AppStart4 from "AppStart4";
 import StateTestComponent from "component4/StateTestComponent";
-import ReducerTestComponent from "components3/ReducerTestComponent";
+
 import { CounterProvider } from "component4/CounterProvider";
 import { CountLabel, NameChange, PlusButton } from "component4/ProviderTest";
+import ReducerTestComponent from "component4/ReducerTestComponent";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import BoardHOME from "boardcomponents/BoardHOME";
+import NotFoundCompoent from "boardcomponents/NotFoundCompoent";
 //import WebBoardList from "components1/WebBoardList";
 //import App3 from "./App3";
 
@@ -21,13 +25,31 @@ root.render(
   //<React.StrictMode>
   //<AppStart4 />
   <>
-    <StateTestComponent />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/board/*" element={<BoardHOME />} />
+        <Route path="/state" element={<StateTestComponent />} />
+        <Route path="/reduce" element={<ReducerTestComponent />} />
+        <Route
+          path="/provider"
+          element={
+            <CounterProvider>
+              <CountLabel />
+              <PlusButton />
+              <NameChange />
+            </CounterProvider>
+          }
+        ></Route>
+        <Route path="*" element={<NotFoundCompoent />}></Route>
+      </Routes>
+    </BrowserRouter>
+    {/* <StateTestComponent />
     <ReducerTestComponent />
     <CounterProvider>
       <CountLabel />
       <PlusButton />
       <NameChange />
-    </CounterProvider>
+    </CounterProvider> */}
   </>
   //</React.StrictMode>
 );
